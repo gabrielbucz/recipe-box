@@ -1,0 +1,69 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: #fff;
+}
+
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-body h3 {
+  margin-top: 0;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.date {
+  margin-left: 0.5rem;
+}
+
+.toggle-btn {
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.toggle-btn:hover {
+  background: #e9ecef;
+}
+
+.ingredients {
+  list-style: disc inside;
+  padding-left: 0;
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.card-actions {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+}

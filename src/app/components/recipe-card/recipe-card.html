@@ -1,0 +1,33 @@
+<div class="card">
+  @if (recipe.image) {
+  <img [src]="recipe.image" [alt]="recipe.title" class="card-image" />
+}
+
+  <div class="card-body">
+    <h3>{{ recipe.title | capitalize }}</h3>
+    <p class="description">{{ recipe.description }}</p>
+
+    <p class="meta">
+      <strong>Ingredientes:</strong> {{ ingredientCount() }}
+      @if (recipe.createdAt) {
+        <span class="date">| Criado em: {{ recipe.createdAt | date:'dd/MM/yyyy' }}</span>
+      }
+    </p>
+
+    <button (click)="toggleExpand()" class="toggle-btn">
+      {{ isExpanded() ? 'Ocultar' : 'Ver mais' }} ingredientes
+    </button>
+
+    @if (isExpanded()) {
+      <ul class="ingredients">
+        @for (ingredient of recipe.ingredients; track ingredient) {
+          <li>{{ ingredient }}</li>
+        }
+      </ul>
+    }
+
+    <div class="card-actions">
+      <button (click)="delete()" class="btn-delete">Remover</button>
+    </div>
+  </div>
+</div>
