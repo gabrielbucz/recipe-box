@@ -10,16 +10,24 @@ body {
   color: #333;
 }
 
-.top-header {
+.top-nav {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
   background: #fff;
   border-bottom: 1px solid #ddd;
-  padding: 1rem;
-  text-align: center;
 }
 
-.top-header h1 {
-  margin: 0;
-  color: #333;
+.top-nav a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.top-nav a.active {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 main {

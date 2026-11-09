@@ -1,0 +1,31 @@
+@if (recipe; as r) {
+  <div class="detail">
+    <a routerLink="/recipes" class="btn-back">&larr; Voltar à lista</a>
+
+    @if (r.image) {
+      <img [src]="r.image" [alt]="r.title" class="detail-image" />
+    }
+
+    <h1>{{ r.title }}</h1>
+    <p class="description">{{ r.description }}</p>
+
+    <p class="meta">
+      <span>Criado em: {{ r.createdAt | date:'dd/MM/yyyy' }}</span>
+    </p>
+
+    <h3>Ingredientes</h3>
+    <ul class="ingredients">
+      @for (ingredient of r.ingredients; track ingredient) {
+        <li>{{ ingredient }}</li>
+      }
+    </ul>
+
+    <h3>Modo de preparo</h3>
+    <p class="instructions">{{ r.instructions }}</p>
+  </div>
+} @else {
+  <div class="detail not-found">
+    <p>Receita não encontrada.</p>
+    <a routerLink="/recipes" class="btn-back">Voltar à lista</a>
+  </div>
+}

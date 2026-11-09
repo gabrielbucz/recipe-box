@@ -4,7 +4,7 @@
 }
 
   <div class="card-body">
-    <h3>{{ recipe.title | capitalize }}</h3>
+    <h3><a [routerLink]="['/recipes', recipe.id]">{{ recipe.title | capitalize }}</a></h3>
     <p class="description">{{ recipe.description }}</p>
 
     <p class="meta">

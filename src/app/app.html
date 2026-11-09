@@ -1,7 +1,8 @@
-<header class="top-header">
-  <h1>{{ title }}</h1>
-</header>
+<nav class="top-nav">
+  <a routerLink="" routerLinkActive="active">{{ title }}</a>
+  <a routerLink="/recipes" routerLinkActive="active">Receitas</a>
+</nav>
 
 <main>
-  <app-recipe-list></app-recipe-list>
+  <router-outlet></router-outlet>
 </main>

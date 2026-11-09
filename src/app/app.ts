@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RecipeList } from './components/recipe-list/recipe-list';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
-  imports: [RecipeList],
+  imports: [RouterOutlet, RouterLink],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

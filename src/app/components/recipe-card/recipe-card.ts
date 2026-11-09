@@ -1,4 +1,5 @@
 import { Component, Input, signal, inject, computed, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
@@ -7,7 +8,7 @@ import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 @Component({
   selector: 'app-recipe-card',
   standalone: true,
-  imports: [DatePipe, CapitalizePipe],
+  imports: [RouterLink, DatePipe, CapitalizePipe],
   templateUrl: './recipe-card.html',
   styleUrl: './recipe-card.css'
 })

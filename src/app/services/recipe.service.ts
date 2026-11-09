@@ -37,6 +37,10 @@ export class RecipeService {
     return this.recipes;
   }
 
+  getById(id: number) {
+    return this.recipes().find((r) => r.id === id);
+  }
+
   add(recipe: Omit<Recipe, 'id' | 'createdAt'>) {
     const newId = Math.max(...this.recipes().map((r) => r.id), 0) + 1;
     this.recipes.update((list) => [
