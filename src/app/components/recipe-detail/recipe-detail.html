@@ -1,6 +1,7 @@
 @if (recipe; as r) {
   <div class="detail">
     <a routerLink="/recipes" class="btn-back">&larr; Voltar à lista</a>
+    <a [routerLink]="['/recipes', r.id, 'edit']" class="btn-edit">✏️ Editar</a>
 
     @if (r.image) {
       <img [src]="r.image" [alt]="r.title" class="detail-image" />

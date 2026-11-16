@@ -1,64 +1,111 @@
 <div class="form-card">
-  <h2>+ Nova Receita</h2>
+  <h2>{{ isEditMode() ? '✏️ Editar Receita' : '+ Nova Receita' }}</h2>
 
-  <form (submit)="addRecipe()" class="recipe-form">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
+
     <div class="form-group">
       <label>Título</label>
-      <!-- Two-way binding com [(ngModel)] -->
       <input
         type="text"
-        name="title"
-        [(ngModel)]="newRecipe.title"
+        formControlName="title"
         placeholder="Ex: Bolo de Chocolate"
       />
+      @if (title?.invalid && title?.touched) {
+        <small class="error">
+          @if (title?.errors?.['required']) {
+            Título é obrigatório.
+          } @else if (title?.errors?.['minlength']) {
+            Título deve ter pelo menos 3 caracteres.
+          }
+        </small>
+      }
     </div>
 
     <div class="form-group">
       <label>Descrição</label>
       <input
         type="text"
-        name="description"
-        [(ngModel)]="newRecipe.description"
+        formControlName="description"
         placeholder="Ex: Delicioso bolo caseiro"
       />
+      @if (description?.invalid && description?.touched) {
+        <small class="error">
+          @if (description?.errors?.['required']) {
+            Descrição é obrigatória.
+          } @else if (description?.errors?.['minlength']) {
+            Descrição deve ter pelo menos 10 caracteres.
+          }
+        </small>
+      }
     </div>
 
     <div class="form-group">
-      <label>Ingredientes (separados por vírgula)</label>
-      <input
-        type="text"
-        name="ingredients"
-        [(ngModel)]="ingredientsInput"
-        placeholder="Ex: farinha, açúcar, ovos"
-      />
+      <label>Ingredientes</label>
+      <div class="ingredients-array">
+        @for (ingredient of ingredients.controls; track ingredient; let i = $index) {
+          <div class="ingredient-row">
+            <input
+              type="text"
+              [formControlName]="i"
+              placeholder="Ingrediente..."
+            />
+            <button
+              type="button"
+              (click)="removeIngredient(i)"
+              class="btn-remove-ing"
+              [disabled]="ingredients.length <= 1"
+            >
+              −
+            </button>
+          </div>
+          @if (ingredient.invalid && ingredient.touched) {
+            <small class="error">Ingrediente obrigatório.</small>
+          }
+        }
+        <button type="button" (click)="addIngredient()" class="btn-add-ing">
+          + Adicionar ingrediente
+        </button>
+      </div>
+      @if (ingredients.invalid && ingredients.touched) {
+        <small class="error">Pelo menos um ingrediente é obrigatório.</small>
+      }
     </div>
 
     <div class="form-group">
       <label>Instruções</label>
       <textarea
-        name="instructions"
-        [(ngModel)]="newRecipe.instructions"
+        formControlName="instructions"
         rows="4"
         placeholder="Modo de preparo..."
       ></textarea>
+      @if (instructions?.invalid && instructions?.touched) {
+        <small class="error">
+          @if (instructions?.errors?.['required']) {
+            Instruções são obrigatórias.
+          } @else if (instructions?.errors?.['minlength']) {
+            Instruções devem ter pelo menos 10 caracteres.
+          }
+        </small>
+      }
     </div>
 
     <div class="form-group">
       <label>URL da Imagem</label>
       <input
         type="url"
-        name="image"
-        [(ngModel)]="newRecipe.image"
+        formControlName="image"
         placeholder="https://..."
       />
     </div>
 
-    <button type="submit" class="btn-save">Salvar Receita</button>
-  </form>
+    <div class="form-actions">
+      <button type="submit" class="btn-save" [disabled]="recipeForm.invalid">
+        {{ isEditMode() ? 'Salvar Alterações' : 'Salvar Receita' }}
+      </button>
+      @if (isEditMode()) {
+        <a routerLink="/recipes" class="btn-cancel">Cancelar</a>
+      }
+    </div>
 
-  <div class="preview">
-    <h4>Pré-visualização:</h4>
-    <p>Título: {{ newRecipe.title }}</p>
-    <p>Descrição: {{ newRecipe.description }}</p>
-  </div>
+  </form>
 </div>

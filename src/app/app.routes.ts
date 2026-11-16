@@ -20,6 +20,18 @@ export const routes: Routes = [
     title: 'Detalhe da Receita'
   },
   {
+    path: 'recipes/new',
+    loadComponent: () =>
+      import('./components/recipe-form/recipe-form').then((m) => m.RecipeForm),
+    title: 'Nova Receita'
+  },
+  {
+    path: 'recipes/:id/edit',
+    loadComponent: () =>
+      import('./components/recipe-form/recipe-form').then((m) => m.RecipeForm),
+    title: 'Editar Receita'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

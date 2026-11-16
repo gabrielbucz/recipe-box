@@ -15,8 +15,9 @@ import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 export class RecipeCard {
   @Input({ required: true }) recipe!: Recipe;
 
-  // Output moderno do Angular: emite evento para o componente pai
+  // Outputs modernos do Angular: emitem eventos para o componente pai
   protected readonly remove = output<number>();
+  protected readonly edit = output<number>();
 
   protected readonly recipeService = inject(RecipeService);
 
@@ -34,5 +35,9 @@ export class RecipeCard {
     if (confirm(`Tem certeza que deseja remover "${this.recipe.title}"?`)) {
       this.remove.emit(this.recipe.id);
     }
+  }
+
+  editRecipe() {
+    this.edit.emit(this.recipe.id);
   }
 }

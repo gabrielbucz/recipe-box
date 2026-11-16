@@ -52,7 +52,23 @@
 
 .card-actions {
   margin-top: 1rem;
-  text-align: right;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-edit:hover {
+  background: #0056b3;
 }
 
 .btn-delete {
