@@ -1,6 +1,11 @@
 <section class="hero">
   <h1>Bem-vindo ao {{ title }}</h1>
   <p>Organize, crie e explore suas receitas favoritas em um só lugar.</p>
+  @if (auth.isAuthenticated()) {
+    <button (click)="auth.logout()" class="btn-hero btn-logout">Sair</button>
+  } @else {
+    <button (click)="auth.login()" class="btn-hero btn-login">Entrar</button>
+  }
   <a routerLink="/recipes" class="btn-hero">Ver Receitas</a>
 </section>
 

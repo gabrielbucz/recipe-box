@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
+import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
+import { recipeResolver } from './resolvers/recipe.resolver';
 
 export const routes: Routes = [
   {
@@ -17,19 +20,24 @@ export const routes: Routes = [
     path: 'recipes/:id',
     loadComponent: () =>
       import('./components/recipe-detail/recipe-detail').then((m) => m.RecipeDetail),
-    title: 'Detalhe da Receita'
+    title: 'Detalhe da Receita',
+    resolve: { recipe: recipeResolver }
   },
   {
     path: 'recipes/new',
     loadComponent: () =>
       import('./components/recipe-form/recipe-form').then((m) => m.RecipeForm),
-    title: 'Nova Receita'
+    title: 'Nova Receita',
+    canActivate: [authGuard],
+    canDeactivate: [unsavedChangesGuard]
   },
   {
     path: 'recipes/:id/edit',
     loadComponent: () =>
       import('./components/recipe-form/recipe-form').then((m) => m.RecipeForm),
-    title: 'Editar Receita'
+    title: 'Editar Receita',
+    canActivate: [authGuard],
+    canDeactivate: [unsavedChangesGuard]
   },
   {
     path: '**',

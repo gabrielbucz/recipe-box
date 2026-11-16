@@ -1,6 +1,9 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { Recipe } from '../models/recipe';
 import { RecipeApiService } from './api.service';
+import { of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeService {
@@ -33,6 +36,16 @@ export class RecipeService {
 
   getById(id: number) {
     return this._recipes().find((r) => r.id === id);
+  }
+
+  getRecipeById(id: number): Observable<Recipe | undefined> {
+    const cached = this._recipes().find((r) => r.id === id);
+    if (cached) return of(cached);
+    return this.api.getById(id).pipe(
+      tap((recipe) => {
+        this._recipes.update((list) => [...list, recipe]);
+      })
+    );
   }
 
   add(recipe: Omit<Recipe, 'id' | 'createdAt'>) {

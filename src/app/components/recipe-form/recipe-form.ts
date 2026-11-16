@@ -32,7 +32,21 @@ export class RecipeForm {
   protected readonly isEditMode = signal(false);
   protected readonly editingId = signal<number | null>(null);
 
-  protected readonly recipeForm: FormGroup = this.fb.group({
+  /**
+   * Módulo 7 — CanDeactivate
+   * Chamado pelo unsavedChangesGuard quando o usuário tenta sair da rota.
+   * Retorna false (ou um Observable que emite false) para cancelar a navegação.
+   */
+  canDeactivate(): boolean {
+    if (this.recipeForm.dirty) {
+      return confirm(
+        'Você tem alterações não salvas. Tem certeza que deseja sair desta página?'
+      );
+    }
+    return true;
+  }
+
+  public readonly recipeForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(10)]],
     ingredients: this.fb.array(
