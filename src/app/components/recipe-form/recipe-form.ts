@@ -10,6 +10,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
 
+/**
+ * Módulo 5 — Formulários Reativos (Reactive Forms)
+ * Cadastro/edição de receitas usando FormBuilder, FormGroup, FormArray e Validators.
+ * Inclui validação de campos, feedback de erros e manipulação dinâmica de ingredientes.
+ */
 @Component({
   selector: 'app-recipe-form',
   standalone: true,

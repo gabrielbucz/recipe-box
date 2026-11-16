@@ -7,7 +7,7 @@
       <img [src]="r.image" [alt]="r.title" class="detail-image" />
     }
 
-    <h1>{{ r.title }}</h1>
+    <h1>{{ r.title | capitalize }}</h1>
     <p class="description">{{ r.description }}</p>
 
     <p class="meta">
